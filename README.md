@@ -26,13 +26,14 @@ cd charm
 
 2. Install dependencies
 ```bash
+sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install build-essential flex bison m4 python3.7-dev python3.7-distutils libgmp-dev libssl-dev
 pip install -r requirements.txt
 ```
 
 4. Build charm
 ```bash
-./configure
+./configure.sh
 cd ./deps/pbc && make && sudo ldconfig
 cd - && sudo make && sudo make install && sudo ldconfig
 ```
