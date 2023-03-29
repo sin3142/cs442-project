@@ -20,7 +20,7 @@ class AttributeAuthority:
 
     def get_decryption_keys(self, gid: str, attrs):
         if self.users.get(gid):
-            sk = RW15.auth_genkeys(self.GP, self.id, self.sk, gid, attrs)
+            sk = RW15.auth_genkeys(self.GP, self.sk, gid, attrs)
             return sk
         return None
 
