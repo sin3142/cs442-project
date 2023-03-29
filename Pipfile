@@ -8,6 +8,7 @@ pyparsing = "==2.1.5"
 hypothesis = "*"
 pytest = "*"
 autopep8 = "*"
+dill = "*"
 
 [dev-packages]
 
