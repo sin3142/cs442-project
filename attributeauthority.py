@@ -13,7 +13,7 @@ class AttributeAuthority:
 
     def get_decryption_key(self, gid: str, attr: str):
         if self.users.get(gid):
-            sk = RW15.keygen(self.GP, self.id, self.sk, gid, attr)
+            sk = RW15.keygen(self.GP, self.sk, gid, attr)
             return sk
         return None
 
