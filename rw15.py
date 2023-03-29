@@ -75,12 +75,11 @@ class RW15:
         return match.groups()
 
     @staticmethod
-    def keygen(GP: dict, aid: str, ask: dict, gid: str, attr: str):
+    def keygen(GP: dict, ask: dict, gid: str, attr: str):
         """Generate a user secret key for the attribute.
 
         Args:
             GP (dict): Global parameters.
-            aid (str): Authority identifier.
             ask (dict): Authority secret key.
             gid (str): User identifier.
             attr (str): Attribute in the form of `attr@aid=value`.
@@ -89,11 +88,11 @@ class RW15:
             dict: User secret key for the attribute.
         """
 
+        aid, a, y = itemgetter('aid', 'a', 'y')(ask)
         _, auth_id, _ = RW15.parse_attr(attr)
         assert aid == auth_id, "Attribute not issued by authority"
 
         G, g1, g2 = itemgetter('G', 'g1', 'g2')(GP)
-        a, y = itemgetter('a', 'y')(ask)
         H = F = lambda x: G.hash(x, G2)
 
         # Generate key
@@ -103,12 +102,11 @@ class RW15:
         return {'K': K, 'Kp': Kp}
 
     @staticmethod
-    def auth_genkeys(GP: dict, aid: str, ask: dict, gid: str, attrs: list):
+    def auth_genkeys(GP: dict, ask: dict, gid: str, attrs: list):
         """Generate multiple user secret keys for a given authority.
 
         Args:
             GP (dict): Global parameters.
-            aid (str): Authority identifier.
             ask (dict): Authority secret key.
             gid (str): User identifier.
             attrs (list): Attributes to generate keys for.
@@ -117,7 +115,7 @@ class RW15:
             str, dict: Attribute and user secret key for the attribute.
         """
         for attr in attrs:
-            yield attr, RW15.keygen(GP, aid, ask, gid, attr)
+            yield attr, RW15.keygen(GP, ask, gid, attr)
 
     @staticmethod
     def multiauth_genkeys(GP: dict, asks: dict, gid: str, attrs: list):
@@ -136,7 +134,7 @@ class RW15:
         for attr in attrs:
             _, aid, _ = RW15.parse_attr(attr)
             ask = asks[aid]
-            yield attr, RW15.keygen(GP, aid, ask, gid, attr)
+            yield attr, RW15.keygen(GP, ask, gid, attr)
 
     @staticmethod
     def encrypt(GP: dict, policy_str: str, apks: dict, msg):
