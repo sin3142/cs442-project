@@ -9,6 +9,8 @@ import re
 
 class RW15:
 
+    groups = ['SS512', 'SS1024', 'MNT159', 'MNT201', 'MNT224', 'BN254']
+
     @staticmethod
     def global_setup(group: str):
         """Set up the global parameters.
@@ -23,8 +25,7 @@ class RW15:
         g1 = G.random(G1)
         g2 = G.random(G2)
         egg = pair(g1, g2)
-        H = F = lambda x: G.hash(x, G2)
-        GP = {'G': G, 'g1': g1, 'g2': g2, 'egg': egg, 'H': H, 'F': F}
+        GP = {'G': G, 'g1': g1, 'g2': g2, 'egg': egg}
         return GP
 
     @staticmethod
@@ -91,8 +92,9 @@ class RW15:
         _, auth_id, _ = RW15.parse_attr(attr)
         assert aid == auth_id, "Attribute not issued by authority"
 
-        G, g1, g2, H, F = itemgetter('G', 'g1', 'g2', 'H', 'F')(GP)
+        G, g1, g2 = itemgetter('G', 'g1', 'g2')(GP)
         a, y = itemgetter('a', 'y')(ask)
+        H = F = lambda x: G.hash(x, G2)
 
         # Generate key
         t = G.random(ZR)
@@ -155,7 +157,8 @@ class RW15:
         assert all((RW15.parse_attr(attr)[1] in apks)
                    for attr in attributes), "Missing public key(s)"
 
-        G, g1, egg, F = itemgetter('G', 'g1', 'egg', 'F')(GP)
+        G, g1, egg = itemgetter('G', 'g1', 'egg')(GP)
+        def F(x): return G.hash(x, G2)
         z = G.random(ZR)
         w = G.init(ZR, 0)
 
@@ -195,7 +198,8 @@ class RW15:
         if not pruned:
             raise Exception("Mising secret key(s)")
 
-        G, H, F = itemgetter('G', 'H', 'F')(GP)
+        G = itemgetter('G')(GP)
+        def H(x): return G.hash(x, G2)
         coefs = {}
         policy.compute_coefs(G, policy_tree, 1, coefs)
         B = G.init(GT, 1)
