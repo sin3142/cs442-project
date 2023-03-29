@@ -43,7 +43,7 @@ def parse_arguments():
     # Setup
     setup_parser = subparsers.add_parser('setup')
     setup_subparsers = setup_parser.add_subparsers(
-        dest='target', required=True)
+        dest='type', required=True)
 
     # Setup global parameters
     setup_global_parser = setup_subparsers.add_parser('global')
@@ -59,24 +59,31 @@ def parse_arguments():
 
     # Setup user
     setup_user_parser = setup_subparsers.add_parser('user')
-    setup_user_parser.add_argument('uid', type=str)
+    setup_user_parser.add_argument('gid', type=str)
 
     # Keygen
     keygen_parser = subparsers.add_parser('keygen')
+    keygen_parser.add_argument(
+        '-o', '--outfile', dest='outfile', type=argparse.FileType('w'), default=sys.stdout)
     keygen_parser.add_argument('gp_file', type=argparse.FileType('r'))
     keygen_parser.add_argument('sk_file', type=argparse.FileType('r'))
-    keygen_parser.add_argument('user_file', type=argparse.FileType('r+'))
+    keygen_parser.add_argument('gid', type=str)
     keygen_parser.add_argument('attrs', type=str, nargs='+')
 
     # Encrypt
     encrypt_parser = subparsers.add_parser('encrypt')
+    encrypt_parser.add_argument(
+        '-o', '--outfile', dest='outfile', type=argparse.FileType('w'), default=sys.stdout)
     encrypt_parser.add_argument('gp_file', type=argparse.FileType('r'))
-    encrypt_parser.add_argument('pk_files', type=argparse.FileType('r'), nargs='+')
+    encrypt_parser.add_argument(
+        'pk_files', type=argparse.FileType('r'), nargs='+')
     encrypt_parser.add_argument('policy', type=str)
     encrypt_parser.add_argument('pt_file', type=argparse.FileType('rb'))
 
     # Decrypt
     decrypt_parser = subparsers.add_parser('decrypt')
+    decrypt_parser.add_argument(
+        '-o', '--outfile', dest='outfile', type=argparse.FileType('wb'), default=sys.stdout)
     decrypt_parser.add_argument('gp_file', type=argparse.FileType('r'))
     decrypt_parser.add_argument('user_file', type=argparse.FileType('r'))
     decrypt_parser.add_argument('ct_file', type=argparse.FileType('r'))
@@ -86,50 +93,89 @@ def parse_arguments():
 
 def process_arguments(args):
     if args.command == 'setup':
-        if args.target == 'global':
+
+        if args.type == 'global':
             GP = RW15.global_setup(args.group)
+
             json.dump(serialize(GP), args.outfile, indent=2)
             args.outfile.write('\n')
             args.outfile.close()
-        elif args.target == 'auth':
+
+        elif args.type == 'auth':
             gp_json = json.load(args.gp_file)
             args.gp_file.close()
             G = PairingGroup(gp_json['G']['value'])
             GP = deserialize(gp_json, G)
+
             pk, sk = RW15.auth_setup(GP, args.aid)
-            outfile_pk = open(f'{args.aid}.pk.json', 'w')
-            json.dump(serialize(pk), outfile_pk, indent=2)
-            outfile_pk.write('\n')
-            outfile_pk.close()
-            outfile_sk = open(f'{args.aid}.sk.json', 'w')
-            json.dump(serialize(sk), outfile_sk, indent=2)
-            outfile_sk.write('\n')
-            outfile_sk.close()
-        elif args.target == 'user':
-            outfile_user = open(f'{args.uid}.user.json', 'w')
-            json.dump({
-                'uid': args.uid,
-                'keys': {}
-            }, outfile_user, indent=2)
-            outfile_user.write('\n')
-            outfile_user.close()
+            with open(f'{args.aid}.pk.json', 'w') as outfile_pk:
+                json.dump(serialize(pk), outfile_pk, indent=2)
+                outfile_pk.write('\n')
+            with open(f'{args.aid}.sk.json', 'w') as outfile_sk:
+                json.dump(serialize(sk), outfile_sk, indent=2)
+                outfile_sk.write('\n')
+
+        elif args.type == 'user':
+            with open(f'{args.gid}.user.json', 'w') as outfile_user:
+                json.dump({
+                    'gid': args.gid,
+                    'keys': {}
+                }, outfile_user, indent=2)
+                outfile_user.write('\n')
+
     if args.command == 'keygen':
         gp_json = json.load(args.gp_file)
         args.gp_file.close()
-        sk_json = json.load(args.sk_file)
-        args.sk_file.close()
         G = PairingGroup(gp_json['G']['value'])
         GP = deserialize(gp_json, G)
+
+        sk_json = json.load(args.sk_file)
+        args.sk_file.close()
         SK = deserialize(sk_json, G)
-        user = deserialize(json.load(args.user_file), G)
-        new_uks = {attr: sk for attr, sk in RW15.auth_genkeys(
-            GP, SK, user['uid'], args.attrs)}
-        user['keys'].update(new_uks)
-        args.user_file.seek(0)
-        json.dump(serialize(user), args.user_file, indent=2)
-        args.user_file.write('\n')
+
+        sks = {attr: sk for attr, sk in RW15.auth_genkeys(
+            GP, SK, args.gid, args.attrs)}
+        json.dump(serialize(sks), args.outfile, indent=2)
+        args.outfile.write('\n')
+        args.outfile.close()
+
+    if args.command == 'encrypt':
+        gp_json = json.load(args.gp_file)
+        args.gp_file.close()
+        G = PairingGroup(gp_json['G']['value'])
+        GP = deserialize(gp_json, G)
+
+        pks = {}
+        for pk_file in args.pk_files:
+            pk_json = json.load(pk_file)
+            pk_file.close()
+            PK = deserialize(pk_json, G)
+            pks[PK['aid']] = PK
+
+        ct = RW15.encrypt_bytes(GP, pks, args.policy, args.pt_file.read())
+        args.pt_file.close()
+
+        json.dump(serialize(ct), args.outfile, indent=2)
+        args.outfile.write('\n')
+        args.outfile.close()
+
+    if args.command == 'decrypt':
+        gp_json = json.load(args.gp_file)
+        args.gp_file.close()
+        G = PairingGroup(gp_json['G']['value'])
+        GP = deserialize(gp_json, G)
+
+        user_json = json.load(args.user_file)
         args.user_file.close()
-    
+        user = deserialize(user_json, G)
+
+        ct_json = json.load(args.ct_file)
+        args.ct_file.close()
+        ct = deserialize(ct_json, G)
+
+        pt = RW15.decrypt_bytes(GP, user, ct)
+        args.outfile.write(pt)
+        args.outfile.close()
 
 
 def main():
