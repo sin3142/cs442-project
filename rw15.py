@@ -175,7 +175,7 @@ class RW15:
             C2[attr] = g1 ** -tx
             C3[attr] = apks[aid]['gy'] ** tx * g1 ** zeros[attr]
             C4[attr] = F(attr) ** tx
-        return {'C0': C0, 'C1': C1, 'C2': C2, 'C3': C3, 'C4': C4, 'policy': policy_tree}
+        return {'C0': C0, 'C1': C1, 'C2': C2, 'C3': C3, 'C4': C4, 'policy': policy_str}
 
     @staticmethod
     def decrypt(GP: dict, gid: str, user_sks: dict, ct: dict):
@@ -191,7 +191,8 @@ class RW15:
             G: Decrypted message.
         """
 
-        policy_tree = ct['policy']
+        policy_str = ct['policy']
+        policy_tree = policy.generate_tree(policy_str)
         _, pruned = policy.prune_tree(policy_tree, user_sks.keys())
         if not pruned:
             raise Exception("Mising secret key(s)")
@@ -214,7 +215,7 @@ class RW15:
 
         Args:
             GP (dict): Global parameters.
-            policy_str (str): Encryption policy, in the form of `('A' or 'B') and C`.
+            policy_str (str): Encryption policy, in the form of `('A' or 'B') and 'C'`.
             apks (dict): Public keys of the authorities. { aid: pk }
             msg (bytes): Message to encrypt.
 
@@ -253,7 +254,7 @@ def main():
     pk, sk = RW15.auth_setup(GP, 'A1')
     msg = GP['G'].random(GT)
     ct = RW15.encrypt(GP, "'STUDENT@A1=1'", {'A1': pk}, msg)
-    k = RW15.keygen(GP, 'A1', sk, 'alice', 'STUDENT@A1=1')
+    k = RW15.keygen(GP, sk, 'alice', 'STUDENT@A1=1')
     pt = RW15.decrypt(GP, 'alice', {'STUDENT@A1=1': k}, ct)
     print(pt)
     print(msg)
