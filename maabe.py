@@ -1,199 +1,229 @@
+#!/usr/bin/env python
+
 import argparse
 import json
 import sys
-from charm.toolbox.pairinggroup import PairingGroup, G1, G2
-from charm.core.math.pairing import serialize as _serialize, deserialize as _deserialize, pc_element
+from charm.toolbox.pairinggroup import PairingGroup
+
 from rw15 import RW15
-
-
-def serialize(element):
-    if isinstance(element, dict):
-        return {k: serialize(v) for k, v in element.items()}
-    if isinstance(element, pc_element):
-        return {
-            'type': 'pc_element',
-            'value': _serialize(element, True).decode()
-        }
-    if isinstance(element, PairingGroup):
-        return {
-            'type': 'pairing_group',
-            'value': element.groupType()
-        }
-    return element
-
-
-def deserialize(element, group=None):
-    if isinstance(element, dict):
-        if element.get('type') == 'pc_element':
-            return _deserialize(group.Pairing, element['value'].encode(), True)
-        elif element.get('type') == 'pairing_group':
-            return PairingGroup(element['value'])
-        else:
-            return {k: deserialize(v, group) for k, v in element.items()}
-    else:
-        return element
+from serialize import serialize, deserialize, deserialize_gp
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description='Multi-Authority Attribute-based Encryption CLI')
-    subparsers = parser.add_subparsers(dest='command', required=True)
+    subparsers = parser.add_subparsers(dest='domain', required=True)
 
-    setup_parser = subparsers.add_parser('setup')
+    # global-setup
+    global_setup_parser = subparsers.add_parser('global-setup')
+    global_setup_parser.add_argument('-g', dest='group', choices=RW15.groups, default='BN254')  # noqa
+    global_setup_parser.add_argument('-o', dest='outfile', default='gp')
 
-    setup_subparsers = setup_parser.add_subparsers(dest='type', required=True)
-    setup_global_parser = setup_subparsers.add_parser('global')
-    setup_auth_parser = setup_subparsers.add_parser('auth')
-    setup_user_parser = setup_subparsers.add_parser('user')
+    #######################
+    # Attribute Authority #
+    #######################
+    auth_parser = subparsers.add_parser('auth')
+    auth_subparsers = auth_parser.add_subparsers(dest='command', required=True)
 
-    keygen_parser = subparsers.add_parser('keygen')
-    add_keys_parser = subparsers.add_parser('add-keys')
+    # auth setup
+    auth_setup_parser = auth_subparsers.add_parser('setup')
+    auth_setup_parser.add_argument('-G', dest='gp_file', default='gp')
+    auth_setup_parser.add_argument('aid')
+    auth_setup_parser.add_argument('-o', dest='outfile')
+    auth_setup_parser.add_argument('-opk', dest='outpubkey')
+
+    # auth keygen
+    auth_keygen_parser = auth_subparsers.add_parser('keygen')
+    auth_keygen_parser.add_argument('auth_file')
+    auth_keygen_parser.add_argument('gid')
+    auth_keygen_parser.add_argument('attrs', nargs='+')
+    auth_keygen_parser.add_argument('-o', dest='outfile')
+
+    ########
+    # User #
+    ########
+    user_parser = subparsers.add_parser('user')
+    user_subparsers = user_parser.add_subparsers(dest='command', required=True)
+
+    # user setup
+    user_setup_parser = user_subparsers.add_parser('setup')
+    user_setup_parser.add_argument('-G', dest='gp_file', default='gp')
+    user_setup_parser.add_argument('gid')
+    user_setup_parser.add_argument('-o', dest='outfile')
+
+    # user add-keys
+    user_add_keys_parser = user_subparsers.add_parser('add-keys')
+    user_add_keys_parser.add_argument('user_file')
+    user_add_keys_parser.add_argument('key_files', nargs='+')
+
+    # user remove-keys
+    user_remove_keys_parser = user_subparsers.add_parser('remove-keys')
+    user_remove_keys_parser.add_argument('user_file')
+    user_remove_keys_parser.add_argument('attrs', nargs='+')
+
+    # user decrypt
+    user_decrypt_parser = user_subparsers.add_parser('decrypt')
+    user_decrypt_parser.add_argument('user_file')
+    user_decrypt_parser.add_argument('ciphertext_file')
+    user_decrypt_parser.add_argument('-o', dest='outfile')
+
+    ##############
+    # Data Owner #
+    ##############
+
+    # create-policy
+    policy_setup_parser = subparsers.add_parser('create-policy')
+    policy_setup_parser.add_argument('-G', dest='gp_file', default='gp')
+    policy_setup_parser.add_argument('policy')
+    policy_setup_parser.add_argument('pubkey_files', nargs='+')
+    policy_setup_parser.add_argument('-o', dest='outfile')
+
+    # encrypt
     encrypt_parser = subparsers.add_parser('encrypt')
-    decrypt_parser = subparsers.add_parser('decrypt')
-
-    setup_global_parser.add_argument('-o', dest='outfile', default='gp.json')
-    setup_global_parser.add_argument('-g', dest='group', choices=RW15.groups, default='BN254')  # noqa
-
-    setup_auth_parser.add_argument('-G', dest='gp_file', default='gp.json')
-    setup_auth_parser.add_argument('aid')
-
-    setup_user_parser.add_argument('gid')
-
-    keygen_parser.add_argument('-G', dest='gp_file', default='gp.json')
-    keygen_parser.add_argument('-o', dest='outfile')
-    keygen_parser.add_argument('sk_file')
-    keygen_parser.add_argument('gid')
-    keygen_parser.add_argument('attrs', nargs='+')
-
-    add_keys_parser.add_argument('user_file')
-    add_keys_parser.add_argument('key_files', nargs='+')
-
-    encrypt_parser.add_argument('-G', dest='gp_file', default='gp.json')
+    encrypt_parser.add_argument('policy_file')
+    encrypt_parser.add_argument('plaintext_file')
     encrypt_parser.add_argument('-o', dest='outfile')
-    encrypt_parser.add_argument('policy')
-    encrypt_parser.add_argument('pt_file')
-    encrypt_parser.add_argument('pk_files', nargs='+')
-
-    decrypt_parser.add_argument('-G', dest='gp_file', default='gp.json')
-    decrypt_parser.add_argument('-o', dest='outfile')
-    decrypt_parser.add_argument('user_file')
-    decrypt_parser.add_argument('ct_file')
 
     return parser.parse_args()
 
 
 def process_arguments(args):
-    if args.command == 'setup':
 
-        if args.type == 'global':
+    if args.domain == 'global-setup':
 
-            GP = RW15.global_setup(args.group)
+        gp = RW15.global_setup(args.group)
+        with open(args.outfile, 'w') as f:
+            json.dump(serialize(gp), f, indent=2)
 
-            with open(args.outfile, 'w') as outfile:
-                json.dump(serialize(GP), outfile, indent=2)
-                outfile.write('\n')
+    elif args.domain == 'create-policy':
 
-        elif args.type == 'auth':
+        with open(args.gp_file, 'r') as f:
+            gp_json = json.load(f)
+            gp, G = deserialize_gp(gp_json)
 
-            with open(args.gp_file, 'r') as gp_file:
-                gp_json = json.load(gp_file)
+        pk_dict = {}
+        for pubkey_file in args.pubkey_files:
+            with open(pubkey_file, 'r') as f:
+                pk = deserialize(json.load(f), G)
+                pk_dict[pk['aid']] = pk  # no pubkey signatures
 
-            G = PairingGroup(gp_json['G']['value'])
-            GP = deserialize(gp_json, G)
-            pk, sk = RW15.auth_setup(GP, args.aid)
+        policy = {'gp': gp, 'policy': args.policy, 'pk_dict': pk_dict}
 
-            with open(f'{args.aid}.pk.json', 'w') as outfile_pk:
-                json.dump(serialize(pk), outfile_pk, indent=2)
-                outfile_pk.write('\n')
-            with open(f'{args.aid}.sk.json', 'w') as outfile_sk:
-                json.dump(serialize(sk), outfile_sk, indent=2)
-                outfile_sk.write('\n')
+        # Test policy
+        RW15.encrypt_bytes(policy['gp'], policy['policy'], policy['pk_dict'], b'test')  # noqa
 
-        elif args.type == 'user':
+        policy_file = args.outfile or f'{args.policy}.policy'
+        with open(policy_file, 'w') as f:
+            json.dump(serialize(policy), f, indent=2)
 
-            with open(f'{args.gid}.user.json', 'w') as outfile_user:
-                json.dump({
-                    'gid': args.gid,
-                    'keys': {}
-                }, outfile_user, indent=2)
-                outfile_user.write('\n')
+    elif args.domain == 'encrypt':
 
-    if args.command == 'keygen':
+        with open(args.policy_file, 'r') as f:
+            policy_json = json.load(f)
+            gp, G = deserialize_gp(policy_json['gp'])
+            policy = deserialize(policy_json, G)
 
-        with open(args.gp_file, 'r') as gp_file:
-            gp_json = json.load(gp_file)
-        with open(args.sk_file, 'r') as sk_file:
-            sk_json = json.load(sk_file)
+        with open(args.plaintext_file, 'rb') as f:
+            plaintext = f.read()
 
-        G = PairingGroup(gp_json['G']['value'])
-        GP = deserialize(gp_json, G)
-        SK = deserialize(sk_json, G)
-        keys = {attr: sk for attr, sk in RW15.auth_genkeys(
-            GP, SK, args.gid, args.attrs)}
+        gp, policy, pk_dict = policy['gp'], policy['policy'], policy['pk_dict']
+        ciphertext = RW15.encrypt_bytes(gp, policy, pk_dict, plaintext)
 
-        if not args.outfile:
-            args.outfile = f'{args.gid}-{SK["aid"]}.keys.json'
-        with open(args.outfile, 'w') as outfile:
-            json.dump(serialize(keys), outfile, indent=2)
-            outfile.write('\n')
+        ciphertext_file = args.outfile or f'{args.plaintext_file}.ct'
+        with open(ciphertext_file, 'w') as f:
+            json.dump(serialize(ciphertext), f, indent=2)
 
-    if args.command == 'add-keys':
+    elif args.domain == 'auth':
 
-        with open(args.user_file, 'r') as user_file:
-            user_json = json.load(user_file)
-        keys = {}
-        for key_file in args.key_files:
-            with open(key_file, 'r') as key_file:
-                keys.update(json.load(key_file))
+        if args.command == 'setup':
 
-        user_json['keys'].update(keys)
+            with open(args.gp_file, 'r') as f:
+                gp_json = json.load(f)
+                gp, G = deserialize_gp(gp_json)
 
-        with open(args.user_file, 'w') as user_file:
-            json.dump(user_json, user_file, indent=2)
-            user_file.write('\n')
+            pk, sk = RW15.auth_setup(gp, args.aid)
+            auth = {'gp': gp, 'pk': pk, 'sk': sk}
 
-    if args.command == 'encrypt':
+            auth_file = args.outfile or f'{args.aid}.auth'
+            with open(auth_file, 'w') as f:
+                json.dump(serialize(auth), f, indent=2)
 
-        with open(args.gp_file, 'r') as gp_file:
-            gp_json = json.load(gp_file)
-        with open(args.pt_file, 'rb') as pt_file:
-            pt = pt_file.read()
+            pubkey_file = args.outpubkey or f'{args.aid}.pk'
+            with open(pubkey_file, 'w') as f:
+                json.dump(serialize(pk), f, indent=2)
 
-        G = PairingGroup(gp_json['G']['value'])
-        GP = deserialize(gp_json, G)
-        pks = {}
-        for pk_file in args.pk_files:
-            with open(pk_file, 'r') as pk_file:
-                pk_json = json.load(pk_file)
-            pk = deserialize(pk_json, G)
-            pks[pk['aid']] = pk
-        ct = RW15.encrypt_bytes(GP, args.policy, pks, pt)
+        elif args.command == 'keygen':
 
-        if not args.outfile:
-            args.outfile = f'{args.pt_file}.ct.json'
-        with open(args.outfile, 'w') as outfile:
-            json.dump(serialize(ct), outfile, indent=2)
-            outfile.write('\n')
+            with open(args.auth_file, 'r') as f:
+                auth_json = json.load(f)
+                gp, G = deserialize_gp(auth_json['gp'])
+                auth = deserialize(auth_json, G)
 
-    if args.command == 'decrypt':
+            keys = RW15.auth_genkeys(gp, auth['sk'], args.gid, args.attrs)
 
-        with open(args.gp_file, 'r') as gp_file:
-            gp_json = json.load(gp_file)
-        with open(args.user_file, 'r') as user_file:
-            user_json = json.load(user_file)
-        with open(args.ct_file, 'r') as ct_file:
-            ct_json = json.load(ct_file)
+            keys_file = args.outfile or f'{args.gid}.{auth["sk"]["aid"]}.keys'
+            with open(keys_file, 'w') as f:
+                json.dump(serialize(keys), f, indent=2)
 
-        G = PairingGroup(gp_json['G']['value'])
-        GP = deserialize(gp_json, G)
-        user = deserialize(user_json, G)
-        ct = deserialize(ct_json, G)
-        pt = RW15.decrypt_bytes(GP, user['gid'], user['keys'], ct)
+    elif args.domain == 'user':
 
-        if not args.outfile:
-            args.outfile = f'{args.ct_file}.pt'
-        with open(args.outfile, 'wb') as outfile:
-            outfile.write(pt)
+        if args.command == 'setup':
+
+            with open(args.gp_file, 'r') as f:
+                gp_json = json.load(f)
+                gp, G = deserialize_gp(gp_json)
+
+            user = {'gp': gp, 'gid': args.gid, 'keys': {}}
+
+            user_file = args.outfile or f'{args.gid}.user'
+            with open(user_file, 'w') as f:
+                json.dump(serialize(user), f, indent=2)
+
+        elif args.command == 'add-keys':
+
+            with open(args.user_file, 'r') as f:
+                user_json = json.load(f)
+                gp, G = deserialize_gp(user_json['gp'])
+                user = deserialize(user_json, G)
+
+            for key_file in args.key_files:
+                with open(key_file, 'r') as f:
+                    keys_json = json.load(f)
+                    keys = deserialize(keys_json, G)
+                    user['keys'].update(keys)
+
+            with open(args.user_file, 'w') as f:
+                json.dump(serialize(user), f, indent=2)
+
+        elif args.command == 'remove-keys':
+
+            with open(args.user_file, 'r') as f:
+                user_json = json.load(f)
+                gp, G = deserialize_gp(user_json['gp'])
+                user = deserialize(user_json, G)
+
+            for attr in args.attrs:
+                del user['keys'][attr]
+
+            with open(args.user_file, 'w') as f:
+                json.dump(serialize(user), f, indent=2)
+
+        elif args.command == 'decrypt':
+
+            with open(args.user_file, 'r') as f:
+                user_json = json.load(f)
+                gp, G = deserialize_gp(user_json['gp'])
+                user = deserialize(user_json, G)
+
+            with open(args.ciphertext_file, 'r') as f:
+                ciphertext_json = json.load(f)
+                ciphertext = deserialize(ciphertext_json, G)
+
+            plaintext = RW15.decrypt_bytes(gp, user['gid'], user['keys'], ciphertext)  # noqa
+
+            plaintext_file = args.outfile or f'{args.ciphertext_file}.pt'
+            with open(plaintext_file, 'wb') as f:
+                f.write(plaintext)
 
 
 def main():
