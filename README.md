@@ -132,3 +132,17 @@
 - The test results are encrypted with the following policy: `rid@SGH=R001 or clr=high@SGH or (prp=research@SH and grp=SMU@SH)`.
 - Researcher Goh authenticates his ownership of the attributes `prp=research@SH` and `grp=SMU@SH` to SH and receives decryption keys for the attributes.
 - Researcher Goh is able to decrypt the medical history and test results, and uses them to determine the effects of the drug on Patient Koh.
+
+### List of Documents
+
+| Record Type | Record ID | Hospital | Patient ID | Patient Name | Access Policy |
+| --- | --- | --- | --- | --- | --- |
+| Medical History | R001 | SGH | P001 | Patient Chan | `'rid@SH=R001' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'clr@SH=med'"` |
+| Discharge Summary | R002 | MEH | P001 | Patient Chan | `'rid@SH=R002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'` |
+| Allergies | R003 | SGH | P001 | Patient Chan | `'rid@SH=R003' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@SH=low'` |
+| Vaccinations | R004 | SGH | P001 | Patient Chan | `'rid@SH=R004' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
+| Medical Bill | R001 | MEH | P001 | Patient Chan | `'rid@MEH=R001' or 'pid@MEH=P001' or 'prp@MEH=billing' or ('prp@SH=insurance' and 'grp@SH=I001')` |
+| Prescription | R002 | MEH | P001 | Patient Chan | `'rid@MEH=R002' or 'pid@MEH=P001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'` |
+| Medical Profile | R001 | KK | P001 | Patient Teo | `'rid@KK=R001 or pid@KK=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
+| Medical History | R001 | SGH | P002 | Patient Koh | `'rid@SGH=R001 or pid@SGH=P002 or qual=doctor@MOH or clr=med@SGH or (prp=research@SH and grp=SMU@SH)'` |
+| Test Results | R001 | SGH | P002 | Patient Koh | `'rid@SGH=R001 or clr=high@SGH or (prp=research@SH and grp=SMU@SH)'` |
