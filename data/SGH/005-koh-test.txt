@@ -1,6 +1,6 @@
 Record Type: Test Result
 Hospital: Singapore General Hospital
-Record ID: 002
+Record ID: 005
 Patient Name: Koh
 Patient ID: 003
 

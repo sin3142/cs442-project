@@ -1,0 +1,102 @@
+{
+  "C0": {
+    "alg": "HMAC_SHA2",
+    "msg": "{\"ALG\": 0, \"MODE\": 2, \"IV\": \"sU+Am6kgGcucoaiLylPadg==\", \"CipherText\": \"5H85bEWRMfHjob8cH3bhGKBC0+AOhCFjApQnGGm0izU/Zjf+aoADkwhwaT5NPLRXmWlg2vh4QxZPmUmv7lgsYx9v0ARaFn9MzzUSCA5WNzRH7A6BRWcj9jQZJuBYq5xqlKXZi4luDv0PTvGFKOfQt0nAHHAAv6vcGoJ7DXMsUcojS78qS9vZDoqWGNH11DfC3S/j6RWbl7ug8bCp0x69UzU1AJJrKWJZvrbEQHw2ku9EhwTW5PEMHcRUlmRSuOxp2JTC/NXIiD5SSIdcqrLVEA==\"}",
+    "digest": "f07c458de117ee066424be6569c705cdbc98cfc84c6b45d992462a018ed7213a"
+  },
+  "C1": {
+    "C0": {
+      "type": "pc_element",
+      "value": "3:Cu1ZsttgR77V8WmIqICUuvWtKVc5oel2GcgDDpNrDvYgSjgBt2Ag+Rx3SCGOUw3UsFfe9Pp924QdYvUY9jEN2wm1KT2kCdXQcF7uhdjVNooHJVEpMjanmqmj88sPB4TRFaIpqjDNEqXSta8x9diXeiKUeLoqA2OBHe4tA8pgNA8NfmdJtU6DWsznj6/xLVdHweyOCxHNT5155VJl3N1g+w0gGzQCXaDH2rTwgL3PKl3CH4+bYjW8xdMxyQQJWfEOIUT7bST0/LJQsdSAUzcRQFtSku9LFb/P+AGejCV+FUQgHbwhsYSmSXlGmGBmYMsUUER0vzUH+++kEmC4Pyol1A7188u1poPnMO3jkb0XmoPqJw4lXtqXECVxbAWzrVeGFRWq1LSltPQu52qcPadqw8FJZzdJqUHTuApcjm6WptoS0lknJECsJ00ln+ZIdwGr+ITywdPrLZqsRnTkO3OekQbomb0bfUmuYHtQXB/XsOeTaQTg7pOoq8Wme5I2nO9U"
+    },
+    "C1": {
+      "rid@MEH=002": {
+        "type": "pc_element",
+        "value": "3:AQEsVC5/qB2Sj83U20VwD0xCnGG+/wqZ60UYD4i2+bIS86U75NuzQyrEDUWyCcUM8r5SLCnw3INuf1meG504lBZrYcAgxSVcGD3HpL4PWvHsriImbFm03jEIPmWvReNmH5LwDIMM7Ygn0mDgVboucEx4ROPeXY76ZuP4r+Ia3YwRrPn05WyXC3EQ4FkcIKyYjFLRrlVfQnBPojMHKBqYog4rNspjzCJkNKFLkyyypm00iFr1x79WUHOcBWwLuFOWDwWaBwHBi8tsES/lPAq6ZD9jmblL40iw2kqMbC38/GcDKrDbi/+3stiN9jOVfLeYflMC+ngQZ44Q6iWyHneMLQPKfrnPpkadGJM2I3L4y79xy3P1xpslfq8XVWQNBNHuHx4P8ocr5ywH7RV7u/txGwJs5jIxfA9F4nG8wq2VXrcjSxj1Fka106z0hqLiGR4lItwO58+AR4VTLvWCeWk7qh61kUkdRPF1D3Sw4dQtTgG0wfyozw/zGXwG/DTeRLV5"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "3:GNjtiL9NH2L32ft92c2KURNyjZ6wy2+SrCebEXJO5usgR4PhzD0Fh0n9gMXBrLbWQqHRWfz/7I6COWq9pcF/PA9rdgxu0KbeipI7mDxVEABXiLXFbONG6XqpNvQYtnB2IY1a0hkrXjKvbtj4mlC/vPXLKKII2fheftj4DcydbzEIiNGfBAtaX0X6F6JpefeaBIRaIIpnFFYVpViAygalMhzUkEFx5VrWRNrq+iBdTo8VatM60J6l3RKcpjsFWSwbIMYtNJe6e6d8SBDolyhDi63fASINZUE0KKtFnxzrqngfOkbJ4Y7N3BAVM6+IzDaRsisFH8dfIbfWRtR1M34nswWk5JGkcU4RC4JSnIXfxg0pjdki4YnZArt5xRdyuUEqIHeiTQyqnojlD3Y0tDJptqh/HAzOd/eqPHMXagHqz0MbAL9m0B+yjJA/18ZznBfiOOREVW67N7L1xedOSfAjbyHpYJ8J1UvZY0tY5A28+MzVetXWyhQC0qZ7JFaDwOQu"
+      },
+      "prp@MEH=billing": {
+        "type": "pc_element",
+        "value": "3:CPeZG6i+dBV0QUbte3uDBMYah7Nu4YhqD6CTCHaTLY0ZqNZE56WW39VOqiKp5doEUIaEG9+gfeMIoauMuOI1ExB1K0mfU43SKnSsxOswAJv2eSisemEmEPrFvbZMmThWFZhP455t1mkL2HJknS4sD6Xfeh/75OaEeeXR3tj/GlMhn6D7hugF+NoLl4BHhck32efAa7CvbXyLG88CdMaCjBHQnCAmDpaJz//jhG+jXaMrLXbxziClFVl1PlkBk+uoDR+5yFaES70PoUpN7uMAbveZ327n+i9JVa8Z1kt9yZwgYbH7Pg8vQxf9Qd68AaC5xysCs2vFvjAV2AkKD97jnhnez+ZGrsHpGTZeP7apbUQSx10aaf3MgrfoqBRs0NDLD2avIttH9p15qv6tXEDQjvEwFoNtXgZ0mwSU8lL61f4JELnZI+dV84R7/RB4jPSiIeqlR97ryWp76TR+KxkjKB/8NISM+96RYlwlvTR0dKXy0OMjKgFsWoaJv2QUsRu6"
+      },
+      "prp@MEH=insurance": {
+        "type": "pc_element",
+        "value": "3:Hfyv4Jldxlmye3WuHG5QvYSYwxdqIOj67zlZETBJEl0izJk4silOxqKmXmei94mxUGfjrI1nWv+38qS0SzlVrAkqv7AMYnQj9UUP/thhm1QdE0rCzCHIpcowig7dGlZCFno3r0c2XqSSRZpE9yl98vmUwSPxVWc06eeoqXvy33MU2BB38WL4Y9V7RZaj1RnTVFR3bpfNoc8Smu0NPcJ14Ag4Ix7xmLRhznLTDLHhHGGmUXeixAZwqmDqO83xW7tsGeL6wLAT1QlbZNbbBOWzdGoX5/OPKnRj1zV7z48SmRgSdqEnzjej3ZYctwxbvrTIGJKA920wXCMsJ2PwzV5D8gKVdThc228DdDeEHnEaZ8g6tEC/x+ALnBgcKYlx5C5+AqIdSZcbhXlGeZUcXOGpBRRz8Jj6Toq0cNXGUa+aPHkZd4xhYPExz937CwaN+FROr0BX2ZNafbyQlZb79j0F6QMGh+d/gn03U9tAuvvxMGoZuVJzOeTL7yhsOPWYNiD3"
+      },
+      "grp@MEH=AIA": {
+        "type": "pc_element",
+        "value": "3:Bfy4sBIfAiz1mvgbV1n7lIjvrsBymq01bgcKUF4P3aYYKjPqnGO/v2eotpEuHxYuww4k8XSMmyaqcVXaSX0YXAvB3bSWZ+FxIl0k7qD6/whCaEZ+buhH8S9ahE5DrywDBkvqKgZgUPldP0Ny1X+BZdjQJ6RetlTaDnS5DMbwTbAhptnHQ5JmGSpHaZpxWTDr2vv0dvG/v126/LsSvbCh7ANcJbayFK+HIzmpnvBHb3lF1JqWSspRt4tR0kEgA3wUGukQ8vXZ6wXBMbefRrQew0yb4GDL3M22DzoBqTpJz6sJFO4Sh6Rlc8Vpaq7Y0lUUHvxTmbEKDCZ6T+1MRKr0ng11LWsK/cVVME5Paw+2BZ0/iB0VPVnf8VRMeiq0fPSfBtZsfY1uQQNV0Hb409K1Z6BlAM9NeoIbTJBeH9L2grsHs7gWCAQqRbGRld0lcxNyxzuOBw5bkanZaJIAY0WqhAqikRvqPT0dJTzivds6BwsY4uBQrm4B3y8bkj3JSjfT"
+      }
+    },
+    "C2": {
+      "rid@MEH=002": {
+        "type": "pc_element",
+        "value": "1:DyA5BGmq5RSfUktXdcRVjtqoYsbW7fd39+N4JGdnGxcA"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:IhzoKWEKbM2+po1w/aIGbsU4qcC6j+6BWPhcTnRoROUA"
+      },
+      "prp@MEH=billing": {
+        "type": "pc_element",
+        "value": "1:I61yQR37MBhTksEEir+nKvhFnhMfPTQDVHLCDsDDd3AA"
+      },
+      "prp@MEH=insurance": {
+        "type": "pc_element",
+        "value": "1:GTSnQAOZl0C18UI9cVVLtpPa9RHQEmnD9yDy0Rkb/gcA"
+      },
+      "grp@MEH=AIA": {
+        "type": "pc_element",
+        "value": "1:BNrBt73TXXVEyPbnWjd4Iq13IQ6lv5VNCK7t/3PYvj8B"
+      }
+    },
+    "C3": {
+      "rid@MEH=002": {
+        "type": "pc_element",
+        "value": "1:AOCi7XtSGffjw4tGs0sYc6kPVhS2p+d7EfGK3ry1jqEB"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:BS/NNUXkswExcyn9/7MZPQPZ/tKSnHQrkqEoWIaqgWMA"
+      },
+      "prp@MEH=billing": {
+        "type": "pc_element",
+        "value": "1:HsQfW1xl1XqGZlsgOA3oFrHLF5oqu9nJkQZptPM1oDkB"
+      },
+      "prp@MEH=insurance": {
+        "type": "pc_element",
+        "value": "1:CDeNcgMoENsG9JCZLPEW4wP9BRGCz4IJrushoYYPoLMA"
+      },
+      "grp@MEH=AIA": {
+        "type": "pc_element",
+        "value": "1:Aw+/o0NjsauJJ3/lWWDEk4Ei2QQJGC7Al7YqvYFOV5AA"
+      }
+    },
+    "C4": {
+      "rid@MEH=002": {
+        "type": "pc_element",
+        "value": "2:C2uXgAJkKqgHUu/Fz9ehxE2NZj6ELT3DJsWmkkX1/KojvjjOANOJt+cG10zxt4CEpVaxKhWaEP0m72k+XFfsNAE="
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "2:Hu9+LXcxhaB6MfzPjnNgeum5zoSTlonXrwsY/fedu8cD431VPwS2t+jXUI0cU3IrBkoa22QA2IcvpKyxTqUL2AA="
+      },
+      "prp@MEH=billing": {
+        "type": "pc_element",
+        "value": "2:HxYclM3nCOhWzdOJjqUrPs9HpPvTA/zN1eS9KMVbzXcddnCur9UeBsTq06rpzzM10NAfu4Z4VoysMusPpfej6AE="
+      },
+      "prp@MEH=insurance": {
+        "type": "pc_element",
+        "value": "2:GmbqI8/N/VsfuBE976Ef2cH4zkk+kp49Ty9bCHN952sYfqtNrtisIT+0c4w8L6S8sB5HPp7D9Y6DheUDPIC0ZAE="
+      },
+      "grp@MEH=AIA": {
+        "type": "pc_element",
+        "value": "2:AY3ZNECs9n88n8mlm9XWuqhN3isEuEZgOskWZRYD/k0TClqEuZvslvuhiYMzRdoCL1cemf8Ip8CL9vDmCczllgE="
+      }
+    },
+    "policy": "'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or 'prp@MEH=insurance' and 'grp@MEH=AIA'"
+  }
+}

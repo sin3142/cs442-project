@@ -1,6 +1,6 @@
 Record Type: Medical History
 Hospital: Singapore General Hospital
-Record ID: 001
+Record ID: 004
 Patient Name: Koh
 Patient ID: 003
 

@@ -1,6 +1,6 @@
 Record Type: Medical Profile
-Hospital: KK Women’s and Children’s Hospital
-Record ID: 001
+Hospital: KK Women's and Children's Hospital
+Record ID: 003
 Patient Name: Teo
 Patient ID: 002
 

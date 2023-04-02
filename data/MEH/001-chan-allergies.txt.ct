@@ -1,0 +1,102 @@
+{
+  "C0": {
+    "alg": "HMAC_SHA2",
+    "msg": "{\"ALG\": 0, \"MODE\": 2, \"IV\": \"475sF5c0tSntJ04hIrP3gw==\", \"CipherText\": \"7lmOWUUuhOmc83bf1fi5oVEXGqvR1kQBrTVtSmLM8aXgi7hUH0f5DicgnKBeRomgYHiQ004/RZgk5hJz7JqsBZ2/UgPXfdc08fx0dM68xmqvJnJ5XSJtZtamH8gT0BImK/QxpW5iY28d3spK49UZ+IuTsyjzNfJuLSO8w3Gbi9+1a2IzhnDdIAxmLB2rRdG8fX5hS5QZk7HQZTRRYUO4dQ==\"}",
+    "digest": "29f35d39fb398b6a7ee585222a6d234bcd193da4906d463270d5aa76f70e6a35"
+  },
+  "C1": {
+    "C0": {
+      "type": "pc_element",
+      "value": "3:FqRcGFxIeNJ4nYsU82lzR1mLYqCDR4ghO4kUDBH2+KkOu/Z/xxoE76r5ypgwdmnK1GFVWEyASBUcngOGwC66tSIpZCeUeSDiDxGrSHWlj3kQlhaLH0vFpXF+57E+Qz1kGjmyBjixJ6JtN6rdkjYk637oAI8xP8SP54xYo6MI5fADl/RK/1FmIjb16pAC4FS+Sk8Yz2PzKS2QSgHcgOSvtwtWFrBwkpjVGLu+yYr6qafhACo8dVBxBbWrHGYtOvqUGBkcVi5bi9E0MVkFoYxLgjo1HSQ8LAWJuw7Jg/IvMHoLEXXXq/Pz4YdTQKfbdsenZwUaI4wbh6xAlX/4ThwiMw0Z86E3+0J1wn4yj1+h1iLiIZyDGXCwToLDXHmgF5UUCVxwHs92IdM5hvh4quJfT3m3DHFKDTcVcK42OFpKqHwj/LKcTtqTZIf4zpQbCM55+YlCUKujhJtx80oNIL1r3CAVHtFmiLNAJeiM1NdE5X5/Al0uIzbS7Jggl21fJ2op"
+    },
+    "C1": {
+      "rid@MEH=001": {
+        "type": "pc_element",
+        "value": "3:IAuaB/4X+A24k+wCCRQhRneV9KjWstBswPmw/yWO6wMKJd5pF6TOOnw162u3GmUWvKwrdWIrmbzy85MObnFxUhrsysfgxoP+seT8udg18/1de6d7ISMrLD0eHa5DkgpTHQm0lIgHXZNjBTpkgR/KBmS/ETGokc/pEfWTB4TILzoGr9c+4ZquuqIJXRx4f/5ggpGu9l6mYPENylX6IOHo3hxH8Z/g9EfBsPnY6KR2x52Lv1s0zkLU67Anbu90IitCCB6iWzA4TfUkmgq5IfJ6DVlhxiZaLNInjP3hAQH2XYYKhP1ykQ0+rv3TWci2YHO0UsVbjX+NB4wI6DyQJ/M8/gHyr8WZD0CyKCIBinxE1ahs2pOqZmZ28zChm+MwGT4UE9alraCY00s/OJ42giq/wPiQDjdpyxW6Y1O8+yAB9H0afpZF8cO85gXNJ5jeasCmoT3lupb/UZ5KREr4Wd7rWxUvnBJ4p7bdVrWuAphdxyvtvxtZQRh4HtUs3l+ssDtb"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "3:E2gMFOVldTF4D9o1S8hYjBngxN4wq5Q5ZYY8kvIkqWchmAP+i3c9aaz13kIBa6eALIN/fOCqCRSMt7y3pnLwPBrn5KMEjOclAPlgh1zcoe9DValsuMON1lrCODxh3YE6ID42rN0n3sZSHlGpOrqWij+RMCt7iclg4FgQNHdAgeAG3sduLGSz+alkbwohzoY3NZ0T6ExIAVRZpdfRL4sDBALD2I4D5juWPWGbhT62T3WTtwLqdy7c8XvmjpKsFRbOG/SijMJUKZ5VlwVJ9Hn4fNEoLF3JeMjJWFBTsQkmSx8ii5Qz2BBpr7Jj+hpZuJbxbsiBwdJWS8N+3eliMdN/VQXrRMjQGi9tz2bCp8XAo7KXncOB2Gx1CaFFEH7Vebf9Fu3gfsO3PbOmup8AexOUePIHXEzFYOyG7uKDKYojdJEJPvBGSw5hb96A7L1LjZQ+6bADZpegokOmXkW2HBrZuQBPkOcyHlyCYypS9wZPpqBumrGUzV7HKt/SUjbNytAC"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "3:F6bims5OiMaBwb1KVLGfYSRhrd0fV0serwoa1YbFeeAYg2a68YhRu+soKvWfOsq6+ZLD+EIwHZEHP2/6PUHrJBCLwinimHnq5suCGwnT4TRHP1cBMOy3bOucwTxIEy4lA7TLj1lxNBcD2ZJMQDOixZp6EsJenAT4D2+jx7efGIYNmTR0JOOvljX9Gc1Ort9zMX6cyF2scOq4eStKP5o8RQW6yMbtAttAKz9EnkUTtKqBQhr6SWpr7wp5wTmquTRBDBOLhnwwgJH3c2kiYC2rujjNAyjQJ0IvOcfH2syZfocC3Sf0k0lCk/8Xo9OK5mWqvI/IiWYWrlB5Rmq0gujTTRaEowEJ8lc34pJ6JQ3rn5+HLFtPKHgvX92f9QXBEWgJG/F1rCTEoI1e2g6ztTMuvNVcUvNT9dPnVQ0omOPyC0UcGPdYSuf5wj9mjvqU3S+4wndAXVSCIX3apDjliDKhLAN8A4o2NW3Cs8T9dVjEb8UBExZeNx+0B9WK2ujNrW5c"
+      },
+      "qual@MOH=nurse": {
+        "type": "pc_element",
+        "value": "3:EIQP0f5lS+y3SA25cSEgDwmJz0bjn8vZh05w2SrkvVkXLP01JoQvBtwAkOyw+51Ren2G1BjksQwfsBlKP9eGqAy5UISy/JLzWh7OafkAFB2UF0dvn3rdJfsTJO7oqQT7Iy33PAUwunBJFtWycAhnzn4m5buMOcis4qY3g29oJ0IaBDzkj68rNjM6SXRJzXp+X1NtmIcK+1UwxkYUCl8O0wwV3m9SrX9ku9z7Cg1UgEs0DaSTDOPS8fr7A3YbAhOmF3PEFvXhA9TJLkSoZdubAmRANCW0bcHKtNlEeYj/edkGMsnkalbRybcIJoUT/vmGWYwMPkf58cueqwhKlyDttQNRrbPpPM1XCNY5Y+JzMU9Z/1JYj26hHP/CWaWQXnMMHmSZACcg8RjxrWJtBexVsubxv5nxkyCFI08tFB/cTZcV3aEutUXJ1EyMykD6EZcL26i96DtM9EEL/6JoTvH/5wiRgeEvyqxySRSjK0r4IO8MgnXTQpHg1Jm/cPYO71vN"
+      },
+      "clr@MEH=low": {
+        "type": "pc_element",
+        "value": "3:FnSnV5HdEWU7i0goUuTJAXwRA9HFXoN97v87RdTMJPcVBZYj30bVr3kMF3tpZRtlZH7z++WwZEAI71z9XiEy1ALueO5nFt7RaNN/pvmTqrjRonIHdMo6+4PqyISVsrYmHe7wVWSsSB9gu9/Ru0VuwYWypbfiGTC+5WkPMwYrF2kQLvbHfSeXfe/0gMvD5k5dCEwqstw+qhj1O2l6r82pdwdXuvS9YXp3ptRE9nhpMRYr8ktcDnE7UHlQ7mXTThCwHqD9WSCnP/rjuClVAE+5JNvU2Nt+dwkbJeAwEsqb0AMEmuvbGF6YcD14LdM+CC6e7Q2pReV93RxOtky+6/wQIhrLt16Q0e3wAEQT36co116u+3vqGjmFB9O98V8iKViNFKe6gpiOml+b/zWI1lc3pnJfSzAnjwfHqzHI15ekKAMBi1FNZX3gW4JhEWk9ooyJVE9kU0hzhrnB2XwEFi0OhSF8DdYhjm7oPA30BBVMiIwphx4OU5l0IXpnLjSHnob8"
+      }
+    },
+    "C2": {
+      "rid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:Io47L/Na4TkRxfGOUfQOXf99ZgTduwEwPim98N4hy/AA"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:A9HFMECTWiqGD8Z+SAC/VIfjM4y6xwjGluRpBKzMswUB"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "1:C11KsQTUGmRZfbblwA8XHnjWcDXGarwwxveXSfhiIzIA"
+      },
+      "qual@MOH=nurse": {
+        "type": "pc_element",
+        "value": "1:E6ZeGpKe6rLiWzyDwX709ZBukzRGsIBO/BfrK9jTc98B"
+      },
+      "clr@MEH=low": {
+        "type": "pc_element",
+        "value": "1:EcE0bAF4ihNCV2xDosJ96BslrDgBwc9j9/RgS73d2zIA"
+      }
+    },
+    "C3": {
+      "rid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:GOZ8IxTRZ1BbW80YbGx5o/dmmLDlxxQvv1aGeO11oSwB"
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "1:GVJBHBfxz7x0GFAI0ByVVmZ9lqatwPcH6Vc8zIGpKwgA"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "1:GxGmsm+ZuZAeZmVQ0cbhjZacKV2402w8GmEv5+Zf9m8B"
+      },
+      "qual@MOH=nurse": {
+        "type": "pc_element",
+        "value": "1:HE5rUFlVNxntA4dqyh5Jsb4JDiiyl8ws40TK+5yyH4cB"
+      },
+      "clr@MEH=low": {
+        "type": "pc_element",
+        "value": "1:F+xY6P+70r+jgWZtRMHdFcKiRER6x+uvzLvcO6kyEEIA"
+      }
+    },
+    "C4": {
+      "rid@MEH=001": {
+        "type": "pc_element",
+        "value": "2:FDBiZ31ucY90+16FKEqHkzKzjINqpRqjp7Ug1pFzntUPoC9DC4IbNRkcsatJY+fuprlt61EP740OLZtMHsh9sAA="
+      },
+      "pid@MEH=001": {
+        "type": "pc_element",
+        "value": "2:CyjDSr/p4itqBsjZrf15hGfbfkcP6pcIWv0tyTnJfvwa/gbjcS1Pcxn6VJdjb8bC++ZvluzTAy462pUCr/1L6QE="
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "2:AQM/03sfnzth4/Hs9lLc8ISrVcRQPqks+GcP+faXB/Edyt3VbHtu8zgJtpFnXSrBBCb3MxfNwCM9bQAZcmJDywE="
+      },
+      "qual@MOH=nurse": {
+        "type": "pc_element",
+        "value": "2:BYTWvqg8qO0EJ+FHhYhq/YCjbznhJtqIJqW7QbSgE/8iMcINZvHfv6hQQkzyZkuwnqlCKelvXPdaadGpAa3NzwE="
+      },
+      "clr@MEH=low": {
+        "type": "pc_element",
+        "value": "2:DLL9IPXWUFPXWPVeJYNWHf5Cc5u4B4o4GQnYYqLuFukfVNaO4Vb5GqGp0JR6uQ7iGJjQwZV4kmLtIS03MHPLpQE="
+      }
+    },
+    "policy": "'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'"
+  }
+}

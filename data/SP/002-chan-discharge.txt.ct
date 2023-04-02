@@ -1,0 +1,70 @@
+{
+  "C0": {
+    "alg": "HMAC_SHA2",
+    "msg": "{\"ALG\": 0, \"MODE\": 2, \"IV\": \"U10sSm++h+xdo51+l8140g==\", \"CipherText\": \"WYwfMOxO3q3gaa96p1nS2LeFF2FIR64/YLytIecIN0meYsP3tCcnT8JqV0DyLHiEcUHEH4veGdme/UgDuLl0OVNIdNO7BL5q/M4TEuF44+61OwjDjq0iD4NJlH7DR3w/BaM4MVUy1AU7IkMkg114CexhKF9tJzTdaARKQT5xGLfQAQqoJkkRRfUvX5BKIAP0ml2Zw1tPY6OWtyy+o/HWz3EurMc3LokBOkngIfAVI04xX1K0k6dvXeFk7K6zmviqfeJ31aoXmCYx2mfJp5HhAeaq1F0G9moiAJVrUrloQrq1W+p9szdrf0tdMA4jZLVx\"}",
+    "digest": "3854253b44311b5153fa832724f8c43afaf56ee85e8f2191449c84b1383deaf4"
+  },
+  "C1": {
+    "C0": {
+      "type": "pc_element",
+      "value": "3:Ag8uHz5BqRsYQhoz84DiBg0UEWSoPfLFwDpHbHYvSTQMMOVAIvx3zCqAKki62qh2JmGIbPk32BoMdzkEWJISsQDUyaEvJ4gxF1TpXKZ6QpPF/3zyGCnHOCaZsJW8fMo3INiS5kR8KnZgYQpLHdqx6M1TGERPK0hIJCZs5RkWwL4ZVf63F3KHuxcOiDSbSrFUg7eiSDvVZTu6554l+gmmbR+k8/MdI091ZTI/eBbufhnjy84rugOBhCzRUO5Z7Dy7BdXAe0HUCiWfmo2P3mMg658OEm8o4adzsncQ3fTtIbkIpKiEGP1ZITohDBlw76SiwzI07FU7wDfWzUYCEtNvuguK4QzDGp2+Bz+t4B6oIDRt5ajGKkrMH6y2o1NVzTe/AxVG3ARW516h9iIto79Gcem8APIWH527Q5HQKvYVrjQBpnlbER6ePL9huiqRRw/akTGr0jpBy/yIMdeutvQHXBYU4E4Y6tXAd0DOxnRMpGe/5otDE5CCRswrDyeEMvSA"
+    },
+    "C1": {
+      "rid@SH=002": {
+        "type": "pc_element",
+        "value": "3:AzkCzHCQmhJFz7XDnDub7pPfIOpSQrOdTEmucMyxVMgY6bSDHByGKHvIZappkRbLYjGRpuxjyVdsymc3BZcfIyIEy6li+ztoKwdE2VKY6xFlQJLYynb26az6qdPRVtHaGffTNm5+pCTys4qJbYiXtmRCLWZ+0YLZnZ/tFXzqC9IHZmtUk60CgbbNbnRswNp8A46P0plVzLhZ7kkpt5nl/A5WC7tZo1ywjEvo0VqAXva8mY9z2Ap1QrztoHBp6HGuFjCgjPCuV9hJBmmJY9yMt7bgTspOTIwrXaDR2pITVDIe4zh3eI8Gi0wmsSLOh6MfoEH2F8ZpvcMm3R5FFTYkqgs6AQ0Qtn+FB8Wp+vLKzoXjC2ptf40nIJZ+mIDfIewhCDP7Fx3/k0OO+3zDqkiTbcHQoxAz26pxbvatF3Cly3wS6xCWxs6RKmmWpTIppRna6L+pzgYXrjjuPdlsxhSCGAAfKTl8bqj+SwCTwdkgXc6Po90stqw9lanCXM7xb2Un"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "3:C6yVnGT8guL/Aa5Q61H/EAGaAGZk3hXlrmyl5YHa548X7lgnr8gaDlaFoM+SCX1uEcAdHGsFVwC/ZH6gZQFblRgYoHTZdlP58cRLEixCsRNZkI7/1Vww+62RHgLa3bmQGU0lXeD6zee/sDhz3TFQUtbLwQ3CRanZJmKG1Eqq0mcIaCAQ5ixCy4Nxnpi6U9PKzOILlTwFL2W/H6/iNjzLegdiZRcpbyqqUMs+OBrH757U6SvlFHeW/5b88NzqW5XBIQQsNzyCFyN39qOpu2TutblIReMDWWwMY3WUNccXMQsI0B1b05oBD4fE5cWiCkP01HYMA3caHM+Hy32UY9XM4AyNEHouMzMBJh/t8felb3RAzzjvR0U0oMAcct46WgWyFTrHDRcYxwCYDwlvHuFZpOej2FXuOZk6z76LVjhI3NoavgL1YW63Qg1LU3u+U1F2ohj57D2CAQ9+9Aw0pyAfIxLvsft1WP7MxKJTvPnXDrFqI7febmiHILzG7Jgb8d8j"
+      },
+      "spt@MOH=cardiology": {
+        "type": "pc_element",
+        "value": "3:EdgxAhZEFtq4YmI/xO16HakM+AGQXYXofA/4e1UmGBYYzdcUtCmXD0+JZfha36ombsAwtBR+SKifZxkzxzfEgxxKzLL1aVB19Fcuo2Zwmfj24c6Sa1HwQZ+rrTuLBx7cGBZZSqpEJMVEoU2JxX9G522e2rmmPmuGQPpAHH/RWJoXLXzX/fk4fjGFi/UvMKEMdWoREmEvZ8ateNX8kVAYzRf22mC7uAmV7YD/y1KohHmfy++oxRLRBMqmZoLWAcv6DwdL6Kn9p/gIBP6jr8iVfZL1y0+SxpfGY/6aByoP6ZMWKUNl2qpYMc7zWdDVlCrgsVpgkOz5bRyIEilvJwhlKhODpQFK+RvXYi7/P72rCvur9pRSATw7zOxJLXjekxYQChPOmqsUOTSBTJmRvQ+91KMupZkMIQJl44D/CLReZBIbWyJ+GN59qza4pJaDm0IEPt82y1NhZcnOFe4sYZpzOhny01YGlFhZMjdm0Mi26LTzNCLKb6560G8Ulgsn/SbJ"
+      }
+    },
+    "C2": {
+      "rid@SH=002": {
+        "type": "pc_element",
+        "value": "1:C1qYaEzf/Y1CtUn2o1dj7xOlC5kgFBsguR2VJG81vjYB"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "1:E7XefYDTwIkxx3v1qVTz01kepj0aNHhBcv2vOYwcLsIA"
+      },
+      "spt@MOH=cardiology": {
+        "type": "pc_element",
+        "value": "1:F2P0cvAfR5z6Fth0eyo7vpznwG7HJD2Sms0cyI4E/wAA"
+      }
+    },
+    "C3": {
+      "rid@SH=002": {
+        "type": "pc_element",
+        "value": "1:Fgg4CcpXs92pxoOUIs9TadAhheL4Ugau1czYxQonpr0B"
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "1:AEDC+3SPKzjBdMnI6XLlpzewyXPyB+NM6mG42bD5J/IB"
+      },
+      "spt@MOH=cardiology": {
+        "type": "pc_element",
+        "value": "1:DB5AT2vo4U903Twsuv/NIhZ5LEWNP0xHNlzN2emPynkB"
+      }
+    },
+    "C4": {
+      "rid@SH=002": {
+        "type": "pc_element",
+        "value": "2:EKRgbMimnhpLImmWEuzHVyf1sRTaremW/KNi9DGQXhUiqPmXOf2jVeAHD2/1gdHkbFfVwIq/S9Q+eJEb3ckkpwA="
+      },
+      "qual@MOH=doctor": {
+        "type": "pc_element",
+        "value": "2:IFMqeJIu3tFLK9/isNDuuZakLA4PMTkcAn4fQmeAkOoe1fmyrcQauLumvFIrDAmrmaCwrowRkdQpn3reMYEPTAA="
+      },
+      "spt@MOH=cardiology": {
+        "type": "pc_element",
+        "value": "2:H7jcgWaM3SC/hQfvFxFWLYYcyYrpcApUOVMuCiOzHH0WEmoYwSzHPGm5bIFdTtCw8cxwJ7KZOrXXa1VUKCLX1wA="
+      }
+    },
+    "policy": "'rid@SH=002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'"
+  }
+}

@@ -99,7 +99,7 @@
 - After being discharged from MEH, Patient Chan is charged a medical bill.
 - Patient Chan's insurance agent, Agent Chua, needs to access Patient Chan's medical bill to submit it to the insurance company for reimbursement.
 - Patient Chan's medical bill is encrypted with the following policy:
-    `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or ('prp@MEH=insurance' and 'grp@MEH=AIA')`.
+    `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or 'prp@MEH=insurance' and 'grp@MEH=AIA'`.
 - Agent Chua authenticates his ownership of the attributes `prp@MEH=insurance` and `grp@MEH=AIA` to MEH and receives decryption keys for the attributes.
 - Agent Chua is able to decrypt the medical bill and submits it to the insurance company for reimbursement.
 
@@ -127,8 +127,8 @@
 - Patient Koh is a patient at Singapore General Hospital (SGH).
 - Patient Koh is participating in a research study on the effects of a new drug on patients with diabetes.
 - The research team, Researcher Goh, needs to access Patient Koh's medical history and test results to determine the effects of the drug.
-- The medical history is encrypted with the following policy: `'rid@SH=001' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')`.
-- The test results are encrypted with the following policy: `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')`.
+- The medical history is encrypted with the following policy: `'rid@SH=001' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or 'prp@SH=research' and 'grp@SH=SMU'`.
+- The test results are encrypted with the following policy: `'rid@SH=R001' or 'clr@SH=high' or 'prp@SH=research' and 'grp@SH=SMU'`.
 - Researcher Goh authenticates his ownership of the attributes `prp@SH=research` and `grp@SH=SMU` to SH and receives decryption keys for the attributes.
 - Researcher Goh is able to decrypt the medical history and test results, and uses them to determine the effects of the drug on Patient Koh.
 
@@ -141,6 +141,6 @@
 | Drug Allergies | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
 | Medical Bill | 002 | MEH | 001 | Patient Chan | `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or 'prp@MEH=insurance' and 'grp@MEH=AIA'` |
 | Prescription | 003 | MEH | 001 | Patient Chan | `'rid@MEH=003' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'` |
-| Medical Profile | 001 | KK | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
-| Medical History | 001 | SGH | 003 | Patient Koh | `'rid@SH=001' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or 'prp@SH=research' and 'grp@SH=SMU'` |
-| Test Results | 002 | SGH | 003 | Patient Koh | `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')` |
+| Medical Profile | 001 | KK | 002 | Patient Teo | `'rid@SH=003' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
+| Medical History | 001 | SGH | 003 | Patient Koh | `'rid@SH=004' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or 'prp@SH=research' and 'grp@SH=SMU'` |
+| Test Results | 002 | SGH | 003 | Patient Koh | `'rid@SH=005' or 'clr@SH=high' or 'prp@SH=research' and 'grp@SH=SMU'` |
