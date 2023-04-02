@@ -58,10 +58,7 @@
 
 | User | Patient ID | Qualification | Specialty | Purpose | Group ID | Clearance |
 | --- | --- | --- | --- | --- | --- | --- |
-| Doctor Tan | - | `doctor@MOH` | `surgery@MOH`, `pathology@MOH` | - | - | `low@SH`, `med@SH`, `high@SH` |
-| Doctor Lim | - | `doctor@MOH` | `pediatrics@MOH` | - | - | `low@SH`, `med@SH` |
 | Doctor Lee | - | `doctor@MOH` | `cardiology@MOH` | - | - | `low@SH`, `med@SH`, `high@MEH` |
-| Doctor Ng | - | `doctor@MOH` | - | - | - | `low@SH`, `med@SH` |
 | Nurse Tay | - | `nurse@MOH` | - | - | - | `low@SGH` |
 | Pharmacist Wong | - | `pharmacist@MOH` | - | - | - | - |
 | Researcher Goh | - | - | - | `research@SH` | `R001@SH` | |
@@ -69,7 +66,6 @@
 | Patient Chan | `P001@SH` | - | - | - | - | - |
 | Patient Koh | `P002@SH` | - | - | - | - | - |
 | Patient Teo | `P003@SH` | - | - | - | - | - |
-| Patient Ang | `P004@MEH` | - | - | - | - | - |
 
 ### Scenarios
 
