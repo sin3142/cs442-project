@@ -183,12 +183,13 @@ def parse_arguments():
         description='Multi-Authority Attribute-based Encryption CLI')
     subparsers = parser.add_subparsers(dest='command', required=True)
 
-    # auth setup
+    get_gp_parser = subparsers.add_parser('get-gp')
+    get_gp_parser.add_argument('-o', dest='outfile')
+
     get_pubkey_parser = subparsers.add_parser('get-pubkey')
     get_pubkey_parser.add_argument('aid')
     get_pubkey_parser.add_argument('-o', dest='outfile')
 
-    # auth keygen
     keygen_parser = subparsers.add_parser('keygen')
     keygen_parser.add_argument('aid')
     keygen_parser.add_argument('gid')
@@ -200,6 +201,12 @@ def parse_arguments():
 
 
 def process_arguments(args):
+
+    if args.command == 'get-gp':
+
+        gp_file = args.outfile or 'gp'
+        with open(gp_file, 'w') as f:
+            json.dump(serialize(gp), f, indent=2)
 
     if args.command == 'get-pubkey':
 

@@ -16,7 +16,7 @@
 
 | Attribute | ID | Example Values |
 | --- | --- | --- |
-<!-- | Record ID | `rid` | `any`, `R001@SGH`, `R002@NHG` | -->
+| Record ID | `rid` | `any`, `R001@SGH`, `R002@NHG` |
 | Patient ID | `pid` | `any`, `P001@SGH`, `P002@NHG` |
 | Qualification | `qual` | `doctor@MOH`, `nurse@MOH`, `pharmacist@MOH` |
 | Specialty | `spt` | `surgery@MOH`, `cardiology@MOH`, `pediatrics@MOH`, `pathology@MOH` |
@@ -28,14 +28,13 @@
 
 | Record Type | ID | Example Policy |
 | --- | --- | --- |
-| Patient profile | `profile` | `rid or pid or qual=doctor or clr=low or (prp and grp)*` |
+| Medical Profile | `profile` | `rid or pid or qual=doctor or clr=low or (prp and grp)*` |
 | Allergies | `allergies` | `rid or pid or qual=doctor or qual@MOH=nurse and clr=low or (prp and grp)*` |
-| Medical history | `history` | `rid or pid or qual=doctor or clr=med or (prp and grp)*` |
+| Medical History | `history` | `rid or pid or qual=doctor or clr=med or (prp and grp)*` |
 | Prescriptions | `prescriptions` | `rid or pid or qual=doctor and spt* or qual=pharmacist` |
-| Vaccinations | `vaccinations` | `rid or pid or qual=doctor or qual=nurse` |
-| Discharge summary | `discharge_summary` | `rid or qual=doctor and spt*` |
-| Test results | `test` | `rid or clr=high` |
-| Medical bill | `bill` | `rid or pid or prp=billing or (prp and grp)*` |
+| Discharge Summary | `discharge` | `rid or qual=doctor and spt*` |
+| Test Results | `test` | `rid or clr=high` |
+| Medical Bill | `bill` | `rid or pid or prp=billing or (prp and grp)*` |
 
 ## Demo
 
@@ -88,12 +87,12 @@
 
 - Patient Chan is hospitalised at MEH for a week.
 - Nurse Tay is a nurse at MEH.
-- Nurse Tay needs to access Patient Chan's allergies and vaccinations to administer the correct medication.
-- Patient Chan's allergies and vaccinations are encrypted with the following policy:
+- Nurse Tay needs to access Patient Chan's drug allergies to administer the correct medication.
+- Patient Chan's drug allergies are encrypted with the following policy:
     `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'`.
 - Nurse Tay authenticates her ownership of the attributes `qual@MOH=nurse` to MOH and receives decryption key for the attribute.
 - Nurse Tay authenticates her ownership of the attributes `clr@MEH=low` to MEH and receives decryption key for the attribute.
-- Nurse Tay is able to decrypt the allergies and vaccinations, and uses them to administer the correct medication to Patient Chan.
+- Nurse Tay is able to decrypt the drug allergies, and uses them to administer the correct medication to Patient Chan.
 
 #### Scenario 3: Insurance
 
@@ -128,7 +127,7 @@
 - Patient Koh is a patient at Singapore General Hospital (SGH).
 - Patient Koh is participating in a research study on the effects of a new drug on patients with diabetes.
 - The research team, Researcher Goh, needs to access Patient Koh's medical history and test results to determine the effects of the drug.
-- The medical history is encrypted with the following policy: `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')`.
+- The medical history is encrypted with the following policy: `'rid@SH=001' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')`.
 - The test results are encrypted with the following policy: `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')`.
 - Researcher Goh authenticates his ownership of the attributes `prp@SH=research` and `grp@SH=SMU` to SH and receives decryption keys for the attributes.
 - Researcher Goh is able to decrypt the medical history and test results, and uses them to determine the effects of the drug on Patient Koh.
@@ -137,12 +136,11 @@
 
 | Record Type | Record ID | Hospital | Patient ID | Patient Name | Access Policy |
 | --- | --- | --- | --- | --- | --- |
-| Medical History | 001 | SH | 001 | Patient Chan | `'rid@SH=001' or 'pid@SH=001' or 'qual@MOH=doctor' or 'clr@SH=med'` |
-| Discharge Summary | 002 | SH | 001 | Patient Chan | `'rid@SH=002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'` |
-| Allergies | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
-| Vaccinations | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
-| Medical Bill | 002 | MEH | 001 | Patient Chan | `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or ('prp@MEH=insurance' and 'grp@MEH=AIA')` |
+| Medical History | 001 | SP | 001 | Patient Chan | `'rid@SH=001' or 'pid@SH=001' or 'qual@MOH=doctor' or 'clr@SH=med'` |
+| Discharge Summary | 002 | SP | 001 | Patient Chan | `'rid@SH=002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'` |
+| Drug Allergies | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
+| Medical Bill | 002 | MEH | 001 | Patient Chan | `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or 'prp@MEH=insurance' and 'grp@MEH=AIA'` |
 | Prescription | 003 | MEH | 001 | Patient Chan | `'rid@MEH=003' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'` |
-| Medical Profile | 001 | SH | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
-| Medical History | 001 | SH | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')` |
-| Test Results | R001 | SH | 002 | Patient Teo | `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')` |
+| Medical Profile | 001 | KK | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
+| Medical History | 001 | SGH | 003 | Patient Koh | `'rid@SH=001' or 'pid@SH=003' or 'qual@MOH=doctor' or 'clr@SH=med' or 'prp@SH=research' and 'grp@SH=SMU'` |
+| Test Results | 002 | SGH | 003 | Patient Koh | `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')` |
