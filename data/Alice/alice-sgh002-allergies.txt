@@ -1,0 +1,10 @@
+Record Type: Allergies
+Patient ID: Alice
+
+Source: Singapore General Hospital (SGH)
+Record ID: 002
+
+--- Data ---
+
+- Penicillin
+- Sulphur

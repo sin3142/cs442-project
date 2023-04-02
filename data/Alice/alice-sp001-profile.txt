@@ -1,0 +1,11 @@
+Record Type: Patient Profile
+Patient ID: Alice
+
+Source: SingHealth Polyclinics (SP)
+Record ID: 001
+
+--- Data ---
+
+Height: 1.65m
+Weight: 60kg
+Blood Type: A
