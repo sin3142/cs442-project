@@ -60,8 +60,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Doctor Tan | - | `qual@MOH=doctor` | `spt@MOH=surgery` | - | - | `clr@SH=low`, `clr@SH=med`, `clr@MEH=high` |
 | Doctor Lee | - | `qual@MOH=doctor` | `spt@MOH=cardiology` | - | - | `clr@MEH=low`, `clr@MEH=med`, `clr@MEH=high` |
-| Doctor Lim | - | `qual@MOH=doctor` | `spt@MOH=pediatrics` | - | - | `clr@KK=low`, `clr@KK=med`, `clr@KK=high` |
-| Nurse Tay | - | `nurse@MOH` | - | - | - | `clr@MEH=low`, `clr@MEH=med` |
+| Doctor Lim | - | `qual@MOH=doctor` | `spt@MOH=pediatrics` | - | - | `clr@SH=low`, `clr@SH=med`, `clr@SH=high` |
+| Nurse Tay | - | `qual@MOH=nurse` | - | - | - | `clr@MEH=low`, `clr@MEH=med` |
 | Pharmacist Wong | - | `qual@MOH=pharmacist` | - | - | - | - |
 | Researcher Goh | - | - | - | `prp@SH=research` | `grp@SH=SMU` | |
 | Insurance Agent Chua | - | - | - | `prp@MEH=insurance`, `prp@SH=insurance` | `grp@MEH=AIA`, `grp@SH=AIA` | |
