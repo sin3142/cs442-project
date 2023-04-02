@@ -51,21 +51,23 @@
 #### Attribute Authorities
 
 - Ministry of Health (MOH) - issues qualifications and specialities
-- SingHealth (SH) - issue attributes for SGH, SP and KK
+- SingHealth (SH) - issue attributes for SP, SGH and KK
 - MEH - issues attributes for MEH
 
 #### Users & Attributes
 
 | User | Patient ID | Qualification | Specialty | Purpose | Group ID | Clearance |
 | --- | --- | --- | --- | --- | --- | --- |
-| Doctor Lee | - | `doctor@MOH` | `cardiology@MOH` | - | - | `low@SH`, `med@SH`, `high@MEH` |
-| Nurse Tay | - | `nurse@MOH` | - | - | - | `low@SGH` |
-| Pharmacist Wong | - | `pharmacist@MOH` | - | - | - | - |
-| Researcher Goh | - | - | - | `research@SH` | `R001@SH` | |
-| Insurance Agent Chua | - | - | - | `insurance@MEH`, `insurance@SH` | `I001@MEH`, `I001@SH` | |
-| Patient Chan | `P001@SH` | - | - | - | - | - |
-| Patient Koh | `P002@SH` | - | - | - | - | - |
-| Patient Teo | `P003@SH` | - | - | - | - | - |
+| Doctor Tan | - | `qual@MOH=doctor` | `spt@MOH=surgery` | - | - | `clr@SH=low`, `clr@SH=med`, `clr@MEH=high` |
+| Doctor Lee | - | `qual@MOH=doctor` | `spt@MOH=cardiology` | - | - | `clr@MEH=low`, `clr@MEH=med`, `clr@MEH=high` |
+| Doctor Lim | - | `qual@MOH=doctor` | `spt@MOH=pediatrics` | - | - | `clr@KK=low`, `clr@KK=med`, `clr@KK=high` |
+| Nurse Tay | - | `nurse@MOH` | - | - | - | `clr@MEH=low`, `clr@MEH=med` |
+| Pharmacist Wong | - | `qual@MOH=pharmacist` | - | - | - | - |
+| Researcher Goh | - | - | - | `prp@SH=research` | `grp@SH=SMU` | |
+| Insurance Agent Chua | - | - | - | `prp@MEH=insurance`, `prp@SH=insurance` | `grp@MEH=AIA`, `grp@SH=AIA` | |
+| Patient Chan | `001@SH`, `001@MEH` | - | - | - | - | - |
+| Patient Koh | `002@SH` | - | - | - | - | - |
+| Patient Teo | `003@SH` | - | - | - | - | - |
 
 ### Scenarios
 
@@ -76,32 +78,30 @@
 - Doctor Lee is a cardiologist at MEH.
 - Doctor Lee needs to access Patient Chan's medical history and discharge summary to determine the best course of treatment.
 - Patient Chan's medical history is encrypted with the following policy:
-    `'rid@SH=R001' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'clr@SH=med'"`.
+    `'rid@SH=001' or 'pid@SH=001' or 'qual@MOH=doctor' or 'clr@SH=med'`.
 - Patient Chan's discharge summary is encrypted with the following policy:
-    `'rid@SH=R002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'`
+    `'rid@SH=002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'`
 - Doctor Lee authenticates his ownership of the attributes `qual@MOH=doctor` and `spt@MOH=cardiology` to MOH and receives decryption keys for the attributes.
 - Doctor Lee is able to decrypt the medical history and discharge summary, and uses them to determine the best course of treatment for Patient Chan.
 
 #### Scenario 2: Inpatient Treatment
 
 - Patient Chan is hospitalised at MEH for a week.
-- Nurse Tay is a nurse at SGH.
+- Nurse Tay is a nurse at MEH.
 - Nurse Tay needs to access Patient Chan's allergies and vaccinations to administer the correct medication.
-- Patient Chan's allergies are encrypted with the following policy:
-    `'rid@SH=R003' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@SH=low'`.
-- Patient Chan's vaccinations are encrypted with the following policy:
-    `'rid@SH=R004' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'`.
+- Patient Chan's allergies and vaccinations are encrypted with the following policy:
+    `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'`.
 - Nurse Tay authenticates her ownership of the attributes `qual@MOH=nurse` to MOH and receives decryption key for the attribute.
-- Nurse Tay authenticates her ownership of the attributes `clr@SH=low` to SH and receives decryption key for the attribute.
+- Nurse Tay authenticates her ownership of the attributes `clr@MEH=low` to MEH and receives decryption key for the attribute.
 - Nurse Tay is able to decrypt the allergies and vaccinations, and uses them to administer the correct medication to Patient Chan.
 
 #### Scenario 3: Insurance
 
-- After being discharged from MEH, Patient Chan is charged a medical bill of $1000.
+- After being discharged from MEH, Patient Chan is charged a medical bill.
 - Patient Chan's insurance agent, Agent Chua, needs to access Patient Chan's medical bill to submit it to the insurance company for reimbursement.
 - Patient Chan's medical bill is encrypted with the following policy:
-    `'rid@MEH=R001' or 'pid@MEH=P001' or 'prp@MEH=billing' or ('prp@SH=insurance' and 'grp@SH=I001')`.
-- Agent Chua authenticates his ownership of the attributes `prp=insurance@MEH` and `grp=AIA@MEH` to MEH and receives decryption keys for the attributes.
+    `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or ('prp@MEH=insurance' and 'grp@MEH=AIA')`.
+- Agent Chua authenticates his ownership of the attributes `prp@MEH=insurance` and `grp@MEH=AIA` to MEH and receives decryption keys for the attributes.
 - Agent Chua is able to decrypt the medical bill and submits it to the insurance company for reimbursement.
 
 #### Scenario 4: Prescription
@@ -110,7 +110,7 @@
 - Pharmacist Wong is a pharmacist at Unity Pharmacy.
 - Pharmacist Wong needs to verify the prescription to ensure that the medication is safe for Patient Chan.
 - Patient Chan's prescription is encrypted with the following policy:
-    `'rid@MEH=R002' or 'pid@MEH=P001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'`.
+    `'rid@MEH=003' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'`.
 - Pharmacist Wong authenticates his ownership of the attributes `qual@MOH=pharmacist` to MOH and receives decryption key for the attribute.
 - Pharmacist Wong is able to decrypt the prescription and verifies that the medication is safe for Patient Chan.
 
@@ -119,8 +119,8 @@
 - Patient Teo just went through a routine checkup at KK Hospital (KK).
 - Patient Teo wants to view his updated medical profile on his mobile phone.
 - Patient Teo's medical profile is encrypted with the following policy:
-    `'rid@KK=R001 or pid@KK=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'`.
-- Patient Teo authenticates his ownership of the attributes `pid@KK=P001` to KK and receives decryption key for the attribute.
+    `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'`.
+- Patient Teo authenticates his ownership of the attributes `pid@SH=002` to SH and receives decryption key for the attribute.
 - Patient Teo is able to decrypt the medical profile and views it on his mobile phone.
 
 #### Scenario 6: Research
@@ -128,21 +128,21 @@
 - Patient Koh is a patient at Singapore General Hospital (SGH).
 - Patient Koh is participating in a research study on the effects of a new drug on patients with diabetes.
 - The research team, Researcher Goh, needs to access Patient Koh's medical history and test results to determine the effects of the drug.
-- The medical history is encrypted with the following policy: `rid@SGH=R001 or pid@SGH=P002 or qual=doctor@MOH or clr=med@SGH or (prp=research@SH and grp=SMU@SH)`.
-- The test results are encrypted with the following policy: `rid@SGH=R001 or clr=high@SGH or (prp=research@SH and grp=SMU@SH)`.
-- Researcher Goh authenticates his ownership of the attributes `prp=research@SH` and `grp=SMU@SH` to SH and receives decryption keys for the attributes.
+- The medical history is encrypted with the following policy: `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')`.
+- The test results are encrypted with the following policy: `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')`.
+- Researcher Goh authenticates his ownership of the attributes `prp@SH=research` and `grp@SH=SMU` to SH and receives decryption keys for the attributes.
 - Researcher Goh is able to decrypt the medical history and test results, and uses them to determine the effects of the drug on Patient Koh.
 
 ### List of Documents
 
 | Record Type | Record ID | Hospital | Patient ID | Patient Name | Access Policy |
 | --- | --- | --- | --- | --- | --- |
-| Medical History | R001 | SGH | P001 | Patient Chan | `'rid@SH=R001' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'clr@SH=med'"` |
-| Discharge Summary | R002 | MEH | P001 | Patient Chan | `'rid@SH=R002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'` |
-| Allergies | R003 | SGH | P001 | Patient Chan | `'rid@SH=R003' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@SH=low'` |
-| Vaccinations | R004 | SGH | P001 | Patient Chan | `'rid@SH=R004' or 'pid@SH=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
-| Medical Bill | R001 | MEH | P001 | Patient Chan | `'rid@MEH=R001' or 'pid@MEH=P001' or 'prp@MEH=billing' or ('prp@SH=insurance' and 'grp@SH=I001')` |
-| Prescription | R002 | MEH | P001 | Patient Chan | `'rid@MEH=R002' or 'pid@MEH=P001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'` |
-| Medical Profile | R001 | KK | P001 | Patient Teo | `'rid@KK=R001 or pid@KK=P001' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
-| Medical History | R001 | SGH | P002 | Patient Koh | `'rid@SGH=R001 or pid@SGH=P002 or qual=doctor@MOH or clr=med@SGH or (prp=research@SH and grp=SMU@SH)'` |
-| Test Results | R001 | SGH | P002 | Patient Koh | `'rid@SGH=R001 or clr=high@SGH or (prp=research@SH and grp=SMU@SH)'` |
+| Medical History | 001 | SH | 001 | Patient Chan | `'rid@SH=001' or 'pid@SH=001' or 'qual@MOH=doctor' or 'clr@SH=med'` |
+| Discharge Summary | 002 | SH | 001 | Patient Chan | `'rid@SH=002' or 'qual@MOH=doctor' and 'spt@MOH=cardiology'` |
+| Allergies | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
+| Vaccinations | 001 | MEH | 001 | Patient Chan | `'rid@MEH=001' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=nurse' and 'clr@MEH=low'` |
+| Medical Bill | 002 | MEH | 001 | Patient Chan | `'rid@MEH=002' or 'pid@MEH=001' or 'prp@MEH=billing' or ('prp@MEH=insurance' and 'grp@MEH=AIA')` |
+| Prescription | 003 | MEH | 001 | Patient Chan | `'rid@MEH=003' or 'pid@MEH=001' or 'qual@MOH=doctor' or 'qual@MOH=pharmacist'` |
+| Medical Profile | 001 | SH | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'qual@MOH=nurse'` |
+| Medical History | 001 | SH | 002 | Patient Teo | `'rid@SH=001' or 'pid@SH=002' or 'qual@MOH=doctor' or 'clr@SH=med' or ('prp@SH=research' and 'grp@SH=SMU')` |
+| Test Results | R001 | SH | 002 | Patient Teo | `'rid@SH=R001' or 'clr@SH=high' or ('prp@SH=research' and 'grp@SH=SMU')` |
