@@ -61,11 +61,10 @@ def compute_coefs(group, policy_tree: ast.AST, coef, dict: dict):
         return None
     elif isinstance(policy_tree, ast.BoolOp):
         if isinstance(policy_tree.op, ast.Or):
-            coefs = lgi(group, [1, 1])
-            compute_coefs(
-                group, policy_tree.values[0], coef * coefs[1], dict)
-            compute_coefs(
-                group, policy_tree.values[1], coef * coefs[1], dict)
+            coefs = lgi(group, [1])
+            for i in range(len(policy_tree.values)):
+                compute_coefs(
+                    group, policy_tree.values[i], coef * coefs[1], dict)
         elif isinstance(policy_tree.op, ast.And):
             coefs = lgi(
                 group, range(1, len(policy_tree.values)+1))
