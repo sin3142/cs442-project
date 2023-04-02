@@ -119,12 +119,12 @@ auths = {
                 "password": "nahctneitap",
                 "attrs": ["pid@SH=001"]
             },
-            "koh": {
-                "password": "hoktneitap",
-                "attrs": ["pid@SH=002"]
-            },
             "teo": {
                 "password": "oettneitap",
+                "attrs": ["pid@SH=002"]
+            },
+            "koh": {
+                "password": "hoktneitap",
                 "attrs": ["pid@SH=003"]
             }
         }

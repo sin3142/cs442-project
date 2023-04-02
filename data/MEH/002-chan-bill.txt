@@ -1,0 +1,11 @@
+Record Type: Medical Bill
+Hospital: Mount Elizabeth Hospital
+Record ID: 002
+Patient Name: Chan
+Patient ID: 001
+
+Item: Emergency Room Visit
+Amount: $1000.00
+
+Item: Hospitalization
+Amount: $1000.00

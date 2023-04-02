@@ -1,0 +1,9 @@
+Record Type: Medical Profile
+Hospital: KK Women’s and Children’s Hospital
+Record ID: 001
+Patient Name: Teo
+Patient ID: 002
+
+Height: 1.7m
+Weight: 60kg
+Blood Type: A

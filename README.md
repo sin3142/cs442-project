@@ -65,8 +65,8 @@
 | Researcher Goh | - | - | - | `prp@SH=research` | `grp@SH=SMU` | |
 | Insurance Agent Chua | - | - | - | `prp@MEH=insurance`, `prp@SH=insurance` | `grp@MEH=AIA`, `grp@SH=AIA` | |
 | Patient Chan | `pid@SH=001`, `pid@MEH=001` | - | - | - | - | - |
-| Patient Koh | `pid@SH=002` | - | - | - | - | - |
-| Patient Teo | `pid@SH=003` | - | - | - | - | - |
+| Patient Teo | `pid@SH=002` | - | - | - | - | - |
+| Patient Koh | `pid@SH=003` | - | - | - | - | - |
 
 ### Scenarios
 

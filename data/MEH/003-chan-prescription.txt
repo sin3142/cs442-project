@@ -1,0 +1,11 @@
+Record Type: Prescription
+Hospital: Mount Elizabeth Hospital
+Record ID: 003
+Patient Name: Chan
+Patient ID: 001
+
+Drug Name: Aspirin
+Dosage: 100mg
+
+Drug Name: Clopidogrel
+Dosage: 75mg

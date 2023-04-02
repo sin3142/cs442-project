@@ -1,0 +1,8 @@
+Record Type: Drug Allergies
+Hospital: Singapore Polyclinics
+Record ID: 001
+Patient Name: Chan
+Patient ID: 001
+
+Condition: Hypertenion
+Date: 2010-01-01

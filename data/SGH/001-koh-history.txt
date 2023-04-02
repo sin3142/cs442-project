@@ -1,0 +1,8 @@
+Record Type: Medical History
+Hospital: Singapore General Hospital
+Record ID: 001
+Patient Name: Koh
+Patient ID: 003
+
+Condition: Diabetes
+Date: 2010-01-01

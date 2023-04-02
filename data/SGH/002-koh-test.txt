@@ -1,0 +1,8 @@
+Record Type: Test Result
+Hospital: Singapore General Hospital
+Record ID: 002
+Patient Name: Koh
+Patient ID: 003
+
+Test Name: Blood Test
+Test Result: 1.5

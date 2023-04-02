@@ -1,0 +1,10 @@
+Record Type: Drug Allergies
+Hospital: Mount Elizabeth Hospital
+Record ID: 001
+Patient Name: Chan
+Patient ID: 001
+
+Allergies:
+- Penicillin
+- Sulfa
+- Codeine

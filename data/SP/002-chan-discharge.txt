@@ -1,0 +1,8 @@
+Record Type: Discharge Summary
+Hospital: Singapore Polyclinics
+Record ID: 002
+Patient Name: Chan
+Patient ID: 001
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
