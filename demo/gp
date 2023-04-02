@@ -1,0 +1,18 @@
+{
+  "G": {
+    "type": "pairing_group",
+    "value": "BN254"
+  },
+  "g1": {
+    "type": "pc_element",
+    "value": "1:F8nuDqIuvxk+uGu4Qpz7DqGAnYbC4OulXOvk8tlE3wYA"
+  },
+  "g2": {
+    "type": "pc_element",
+    "value": "2:EX/qQy7Hz362PWk9Gb0ruAu/93xEKJiKXS5hiMfg8f0F8V84EuqROAuOx/yNbEfavevWWmxRsSEBlEiZYWsUJgA="
+  },
+  "egg": {
+    "type": "pc_element",
+    "value": "3:GqCiHZfHTDtE3JyzliNndJ93vvp6WU2XWfkK462RTLYghBwXSjPKcoun0noRj6EP3exaoXU5BbLlBVo4vx6Lkx1GoA8eYeUo/XIMFnBBWpMiDSYLUmmxEaJALzmhuzLcEPSYqiuej8jwf8y1ek0gQWDIHYI+1wxJEkaGkxlqXLAYTF4XgA0cPL1kqzsagX5+Kwc2s9vL7opIx9bjwJ0aLwIskjabOcR5VedshDAwhizpu4gYIVEXPH1+LlVO0I9jIymUshOpNRDzJFOdQVhbprPinr9WviEpYCbmfG3947MdU/OZEbx7iqqYhFI/Py1wrSQkuiYt1F/kp/LdhNJYgRDvEOWv7QWfIM5cajoRrChnWbcU4rTPcZWktqhBciGvFCQzob1GmXaW+0okEaZfOLcQ9ZlPlriLAbcOUe+ArYwSxA4eZ0RRn0QXHn1u6ONWzWOql37L7k3OswI4pizvZhkzRfv9Yuq8WJ8PQm+pHn8a4HeXGjM/IIRISPOFgzqD"
+  }
+}
