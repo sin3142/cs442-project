@@ -65,9 +65,9 @@
 | Pharmacist Wong | - | `qual@MOH=pharmacist` | - | - | - | - |
 | Researcher Goh | - | - | - | `prp@SH=research` | `grp@SH=SMU` | |
 | Insurance Agent Chua | - | - | - | `prp@MEH=insurance`, `prp@SH=insurance` | `grp@MEH=AIA`, `grp@SH=AIA` | |
-| Patient Chan | `001@SH`, `001@MEH` | - | - | - | - | - |
-| Patient Koh | `002@SH` | - | - | - | - | - |
-| Patient Teo | `003@SH` | - | - | - | - | - |
+| Patient Chan | `pid@SH=001`, `pid@MEH=001` | - | - | - | - | - |
+| Patient Koh | `pid@SH=002` | - | - | - | - | - |
+| Patient Teo | `pid@SH=003` | - | - | - | - | - |
 
 ### Scenarios
 
