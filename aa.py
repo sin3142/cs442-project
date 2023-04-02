@@ -29,7 +29,7 @@ def parse_arguments():
     auth_setup_parser = auth_subparsers.add_parser('setup')
     auth_setup_parser.add_argument('-G', dest='gp_file', default='gp')
     auth_setup_parser.add_argument('aid')
-    auth_setup_parser.add_argument('-u', dest='users_file')
+    auth_setup_parser.add_argument('users_file')
     auth_setup_parser.add_argument('-o', dest='outfile')
     auth_setup_parser.add_argument('-opk', dest='outpubkey')
 
@@ -81,16 +81,18 @@ def process_arguments(args):
                 gp, G = deserialize_gp(auth_json['gp'])
                 auth = deserialize(auth_json, G)
 
-            if(args.password == auth['users'][args.gid]['password']):
-                if(set(args.attrs).issubset(auth['users'][args.gid]['attributes'])):
-                    keys = RW15.auth_genkeys(gp, auth['sk'], args.gid, args.attrs)
+            if (args.password == auth['users'][args.gid]['password']):
+                if (set(args.attrs).issubset(auth['users'][args.gid]['attributes'])):
+                    keys = RW15.auth_genkeys(
+                        gp, auth['sk'], args.gid, args.attrs)
 
                     keys_file = args.outfile or f'{args.gid}.{auth["sk"]["aid"]}.keys'
                     with open(keys_file, 'w') as f:
                         json.dump(serialize(keys), f, indent=2)
 
                 else:
-                    print(args.gid + "does not have the attributes:" + set(args.attrs).difference(auth['users'][args.gid]['attributes']))
+                    print(args.gid + "does not have the attributes:" +
+                          set(args.attrs).difference(auth['users'][args.gid]['attributes']))
 
             else:
                 print("Wrong password")
